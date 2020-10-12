@@ -22,7 +22,6 @@ namespace programa_boliche
             // 1.5.
             string val;
             int qtd_jogadores = 0;
-            //int[] total_pontos_jogador;
 
             do
             {
@@ -35,25 +34,21 @@ namespace programa_boliche
             while (!fim_partida)
             {
                 // 1.1
-                int frame = 1;
-                int jogador = 1;
                 int total_pontos_frame = 0;
+                int frame_strike = 0; // 1.8.
+                int jogador_strike = 0; // 1.8
+                int[] total_pontos_jogador = new int[qtd_jogadores + 1];
 
-                while (frame <= qtd_frames)
+                for (int frame = 1; frame <= qtd_frames; frame++)
                 {
-
-                    jogador = 1; // 1.5
-                    bool strike_primeiro_frame = false; // 1.8.
-                    while (jogador <= qtd_jogadores)
+                    for (int jogador = 1; jogador <= qtd_jogadores; jogador++) // 1.5
                     {
-
                         // 1.4., 1.6.
                         bool spare_segundo_frame = false;
-                        int arremesso = 1;
                         int qtd_pinos_derrubados_arremesso = 0;
                         int qtd_total_pinos_derrubados_frame = 0;
 
-                        while (arremesso <= qtd_arremessos_por_frame)
+                        for (int arremesso = 1; arremesso <= qtd_arremessos_por_frame; arremesso++)
                         {
                             // 1.6.
                             do
@@ -69,36 +64,38 @@ namespace programa_boliche
                             // 1.8.
                             if (arremesso == 1 && (qtd_pinos_derrubados_arremesso == qtd_pinos_por_frame))
                             {
-                                total_pontos_frame = qtd_total_pinos_derrubados_frame;
-                                strike_primeiro_frame = true;
-                                arremesso += 1;
+                                frame_strike = frame;
+                                jogador_strike = jogador;
                             }
 
-                            arremesso += 1;
-                        }
-
-                        // 1.7
-                        if (!(qtd_total_pinos_derrubados_frame == qtd_pinos_por_frame))
-                        {
                             total_pontos_frame = qtd_total_pinos_derrubados_frame;
+
+                            // 1.8
+                            if ((frame_strike > 0 && jogador_strike == jogador) && (frame == frame_strike))
+                            {
+                                break;
+                            }
                         }
 
                         // 1.8.
-                        if (frame > 1 && strike_primeiro_frame)
+                        if ((frame_strike > 0 && jogador_strike == jogador) && (frame != frame_strike))
                         {
                             total_pontos_frame = qtd_total_pinos_derrubados_frame * 2;
-                            strike_primeiro_frame = false;
+                            frame_strike = 0;
+                            jogador_strike = 0;
                         }
 
-                        //total_pontos_jogador[jogador] = total_pontos_jogador[jogador] + total_pontos_frame;
-                        Console.WriteLine($"Total de Pontos do Jogador/frame {jogador - 1} (frame {frame}): " + total_pontos_frame);
+                        total_pontos_jogador[jogador] = total_pontos_jogador[jogador] + total_pontos_frame;
 
-                        jogador += 1;
+                        Console.WriteLine($"Total de Pontos do Jogador {jogador} (frame {frame}): " + total_pontos_frame);
 
                     }
 
-                    //Console.WriteLine($"Total de Pontos do Jogador {jogador - 1} (frame {frame}): " + total_pontos_jogador[jogador - 1]);
-                    frame += 1;
+                }
+
+                for (int i = 1; i <= qtd_jogadores; i++)
+                {
+                    Console.WriteLine($"Pontuação geral do Jogador {i}): " + total_pontos_jogador[i]);
                 }
 
                 fim_partida = true;
