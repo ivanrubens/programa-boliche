@@ -40,7 +40,7 @@ namespace programa_boliche
                     int total_pontos_frame = 0;
                     int frame_strike = 0; // 1.8.
                     int jogador_strike = 0; // 1.8
-                    string sinal_placar = ""; //1.8 e 1.9
+                    string sinal_placar = ""; // 1.8 e 1.9
                     int frame_spare = 0; // 1.8.
                     int jogador_spare = 0; // 1.8
 
@@ -51,7 +51,6 @@ namespace programa_boliche
                         for (int jogador = 1; jogador <= qtd_jogadores; jogador++) // 1.5
                         {
                             // 1.4., 1.6.
-                            bool spare_segundo_frame = false;
                             int qtd_pinos_derrubados_arremesso = 0;
                             int qtd_total_pinos_derrubados_frame = 0;
 
