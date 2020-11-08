@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace programa_boliche
+namespace ConsoleApp
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -68,7 +68,7 @@ namespace programa_boliche
                                 qtd_total_pinos_derrubados_frame = qtd_total_pinos_derrubados_frame + qtd_pinos_derrubados_arremesso;
 
                                 // 1.8.
-                                if (arremesso == 1 && (qtd_pinos_derrubados_arremesso == qtd_pinos_por_frame))
+                                if (FoiStrike(arremesso, qtd_pinos_derrubados_arremesso, qtd_pinos_por_frame))
                                 {
                                     frame_strike = frame;
                                     jogador_strike = jogador;
@@ -143,6 +143,16 @@ namespace programa_boliche
                 }
             }
 
+        }
+
+        public static bool FoiStrike(int arremesso, int quantidadePinosDerrubados, int quantidadePinosPorFrame)
+        {
+            if (arremesso == 1 && (quantidadePinosDerrubados == quantidadePinosPorFrame))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
