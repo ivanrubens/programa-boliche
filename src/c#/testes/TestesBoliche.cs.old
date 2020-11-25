@@ -14,6 +14,7 @@ namespace Testes
             var quantidadePinosDerrubados = 10;
             var quantidadePinosPorFrame = 10;
 
+            // Act
             var foiStrike = Program.FoiStrike(arremesso, quantidadePinosDerrubados, quantidadePinosPorFrame);
 
             // Assert
@@ -29,6 +30,7 @@ namespace Testes
             var quantidadePinosDerrubados = 10;
             var quantidadePinosPorFrame = 10;
 
+            // Act
             var foiStrike = Program.FoiStrike(arremesso, quantidadePinosDerrubados, quantidadePinosPorFrame);
 
             // Assert
@@ -44,11 +46,29 @@ namespace Testes
             var quantidadePinosDerrubados = 5;
             var quantidadePinosPorFrame = 10;
 
+            // Act
             var foiStrike = Program.FoiStrike(arremesso, quantidadePinosDerrubados, quantidadePinosPorFrame);
 
             // Assert
             Assert.IsFalse(foiStrike);
 
         }
+
+        [TestMethod]
+        public void TestarPosStrikeLancamento2PontosDobrados_True()
+        {
+            // Arrange (dados da entrada)
+            int frame = 1;
+            int lançamento = 1;
+            bool strike = true;
+
+            //Lançamento 2: 0
+
+            // Act
+
+            // Assert
+
+        }
+
     }
 }
